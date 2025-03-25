@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopDown Advisory - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../profil.css">
+    <style>        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Structure principale */
+        .tda-container {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Header avec effet parallaxe */
+        .tda-header {
+            position: relative;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 26, 109, 0.9) 0%, rgba(43, 10, 83, 0.9) 100%);
+            z-index: -2;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MCcgaGVpZ2h0PSc1MCc+CiAgPHJlY3Qgd2lkdGg9JzUwJyBoZWlnaHQ9JzUwJyBmaWxsPScjMmIwYTUzJy8+CiAgPGNpcmNsZSBjeD0nMjUnIGN5PScyNScgcj0nMScgZmlsbD0nIzQzMWE2ZCcvPgo8L3N2Zz4=');
+            opacity: 0.2;
+            z-index: -1;
+        }
+        
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+        
+        .company-name {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tagline {
+            max-width: 700px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin: 1rem 0 2rem;
+            opacity: 0.9;
+        }
+        
+        .header-cta {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .header-cta:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .header-cta i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Contenu principal en grille */
+        .tda-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--bg-primary);
+        }
+        
+        /* Sidebar */
+        .tda-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .sidebar-box {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .contact-info-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .contact-info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .sidebar-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-primary);
+            display: inline-block;
+        }
+        
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(162, 155, 254, 0.1);
+            border-radius: var(--border-radius);
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+        }
+        
+        /* Main content */
+        .tda-main {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .content-section {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .section-content {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+        
+        .service-card {
+            padding: 1.2rem;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-primary);
+        }
+        
+        .service-icon {
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .service-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.2rem;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .project-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1rem;
+        }
+        
+        .project-type {
+            color: var(--accent-primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+        
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .project-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        /* Testimonials */
+        .testimonials-slider {
+            margin-top: 1.2rem;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .testimonial {
+            padding: 1rem 0;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent-primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+        }
+        
+        .author-info span {
+            display: block;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .author-position {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .tda-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tda-content {
+                padding: 1rem;
+            }
+            
+            .tda-header {
+                height: 400px;
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tda-container">
+        <!-- Header avec effet visuels -->
+        <header class="tda-header">
+            <div class="header-bg"></div>
+            <div class="header-pattern"></div>
+            
+            <div class="logo-wrapper">
+                <img src="../projet.image/stfl.png" alt="TopDown Advisory Logo" class="logo-img">
+                <h1 class="company-name">TopDown Advisory</h1>
+            </div>
+            
+            <p class="tagline">Experts en stress tests bancaires et solutions financières innovantes au service des institutions financières</p>
+            
+            <a href="#contact" class="header-cta">
+                <i class="fas fa-envelope"></i>
+                Nous contacter
+            </a>
+        </header>
+        
+        <!-- Contenu principal en grille (sidebar + main) -->
+        <div class="tda-content">
+            <!-- Sidebar avec contact et statistiques -->
+            <aside class="tda-sidebar">
+                <div class="sidebar-box">
+                    <h3 class="sidebar-title">Contact</h3>
+                    <ul class="contact-info-list">
+                        <li class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">contact@topdownadvisory.com</div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">+33 6 XX XX XX XX</div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">Paris, France</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-box">
+                    <h3 class="sidebar-title">Nos chiffres</h3>
+                    <div class="quick-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Stress Tests Réalisés</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Banques Partenaires</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Solutions Logicielles</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Pays Couverts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-box">
+                    <h3 class="sidebar-title">Témoignage</h3>
+                    <div class="testimonial">
+                        <p class="testimonial-text">
+                            L'expertise de TopDown Advisory nous a permis d'améliorer considérablement la qualité de nos stress tests et de répondre plus efficacement aux exigences réglementaires.
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="author-image">
+                            <div class="author-info">
+                                <span class="author-name">Thomas Laurent</span>
+                                <span class="author-position">Directeur des Risques, Banque XYZ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Main content -->
+            <main class="tda-main">
+                <section class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h2 class="section-title">Qui sommes-nous ?</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>TopDown Advisory est un cabinet de conseil spécialisé dans les stress tests bancaires et les analyses financières pour le secteur bancaire. Notre expertise nous permet d'accompagner les institutions financières dans l'évaluation de leur résilience face aux scénarios de crise et dans le respect des exigences réglementaires.</p>
+                        <p>Fondée durant mon BTS SIO option SLAM, notre société combine des compétences techniques en développement informatique et une connaissance approfondie du secteur bancaire pour offrir des solutions sur mesure adaptées aux enjeux actuels du marché.</p>
+                    </div>
+                </section>
+                
+                <section class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h2 class="section-title">Nos Services</h2>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="service-title">Stress Tests Bancaires</h3>
+                            <p class="service-description">
+                                Conception et mise en œuvre de scénarios de stress tests pour évaluer la résistance 
+                                des établissements bancaires face à des situations économiques extrêmes.
+                            </p>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3 class="service-title">Solutions Logicielles</h3>
+                            <p class="service-description">
+                                Développement d'applications web et outils spécifiques pour automatiser 
+                                les processus d'analyse de risque et de stress testing bancaire.
+                            </p>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3 class="service-title">Reporting Réglementaire</h3>
+                            <p class="service-description">
+                                Assistance dans la préparation des rapports réglementaires et la conformité 
+                                aux exigences des autorités de supervision bancaire.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h2 class="section-title">Nos Réalisations</h2>
+                    </div>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="../projet.image/stfl.png" alt="Application de Stress Test">
+                            </div>
+                            <div class="project-content">
+                                <span class="project-type">Application Web</span>
+                                <h3 class="project-title">Stress Test FL</h3>
+                                <p class="project-description">
+                                    Plateforme web complète pour la gestion et l'exécution des stress tests bancaires.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="../projet.image/api.png" alt="API DataPreview">
+                            </div>
+                            <div class="project-content">
+                                <span class="project-type">API</span>
+                                <h3 class="project-title">DataPreviewAPI</h3>
+                                <p class="project-description">
+                                    API de prévisualisation et validation des données financières avant traitement.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h2 class="section-title">Notre Approche</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>Chez TopDown Advisory, nous croyons en une approche collaborative et personnalisée. Nous travaillons étroitement avec nos clients pour comprendre leurs besoins spécifiques et développer des solutions adaptées à leur contexte.</p>
+                        <p>Notre méthodologie combine expertise technique, connaissance réglementaire et innovation pour offrir des résultats fiables et exploitables. Nous accompagnons nos clients à chaque étape du processus, de l'analyse initiale à l'implémentation finale.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
