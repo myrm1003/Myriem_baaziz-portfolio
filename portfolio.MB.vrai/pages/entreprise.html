@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Expériences Professionnelles - Portfolio BTS SIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../profil.css">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent-primary: #8a4fff;
+            --accent-secondary: #6b3fd9;
+            --accent-gradient: linear-gradient(135deg, #8a4fff 0%, #6b3fd9 100%);
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --border-color: #404040;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Structure principale */
+        .portfolio-container {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        /* Header avec effet parallaxe */
+        .portfolio-header {
+            position: relative;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(67, 26, 109, 0.9) 0%, rgba(43, 10, 83, 0.9) 100%);
+            z-index: -2;
+        }
+
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MCcgaGVpZ2h0PSc1MCc+CiAgPHJlY3Qgd2lkdGg9JzUwJyBoZWlnaHQ9JzUwJyBmaWxsPScjMmIwYTUzJy8+CiAgPGNpcmNsZSBjeD0nMjUnIGN5PScyNScgcj0nMScgZmlsbD0nIzQzMWE2ZCcvPgo8L3N2Zz4=');
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .portfolio-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-subtitle {
+            max-width: 700px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin: 1rem 0 2rem;
+            opacity: 0.9;
+        }
+
+        /* Contenu principal en grille */
+        .portfolio-content {
+            padding: 2rem;
+            background: var(--bg-primary);
+        }
+
+        /* Main content */
+        .portfolio-main {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Entreprises */
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .company-card {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(138, 79, 255, 0.2);
+        }
+
+        .company-header {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1MCcgaGVpZ2h0PSc1MCc+CiAgPHJlY3Qgd2lkdGg9JzUwJyBoZWlnaHQ9JzUwJyBmaWxsPScjMmIwYTUzJy8+CiAgPGNpcmNsZSBjeD0nMjUnIGN5PScyNScgcj0nMScgZmlsbD0nIzQzMWE2ZCcvPgo8L3N2Zz4=');
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .company-logo-wrapper {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            margin-right: 1rem;
+            object-fit: contain;
+        }
+
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .company-period {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.3rem;
+        }
+
+        .company-content {
+            padding: 1.5rem;
+        }
+
+        .company-info {
+            margin-bottom: 1.2rem;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-right: 0.5rem;
+        }
+
+        .company-description {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .company-missions {
+            margin-bottom: 1.2rem;
+        }
+
+        .missions-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .missions-title i {
+            color: var(--accent-primary);
+            margin-right: 0.5rem;
+        }
+
+        .missions-list {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .missions-list li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .missions-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+        }
+
+        .company-skills {
+            margin-bottom: 1.2rem;
+        }
+
+        .skills-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skills-title i {
+            color: var(--accent-primary);
+            margin-right: 0.5rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(138, 79, 255, 0.15);
+            color: var(--accent-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .company-cta {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .details-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .details-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 26, 109, 0.2);
+        }
+
+        .details-btn i {
+            margin-left: 0.5rem;
+        }
+
+        /* Modal pour plus de détails */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            max-width: 90%;
+            height: 90vh;
+            margin: 2rem auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .modal-header {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 1rem;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            height: calc(100% - 60px);
+            padding: 0;
+        }
+
+        .pdf-container {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .companies-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-content {
+                padding: 1rem;
+            }
+
+            .portfolio-header {
+                height: 400px;
+                padding: 0 1rem;
+            }
+
+            .company-header {
+                padding: 1rem;
+            }
+
+            .company-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .company-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="portfolio-container">
+        <!-- Header avec effet visuels -->
+        <header class="portfolio-header">
+            <div class="header-bg"></div>
+            <div class="header-pattern"></div>
+
+            <h1 class="portfolio-title">Mes Expériences Professionnelles</h1>
+            <p class="portfolio-subtitle">Découvrez les entreprises qui m'ont accueilli durant mon BTS SIO et les
+                compétences que j'ai pu y développer</p>
+        </header>
+
+        <!-- Contenu principal -->
+        <div class="portfolio-content">
+            <main class="portfolio-main">
+                <section class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h2 class="section-title">Mes Entreprises</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>Durant mon BTS SIO option SLAM, j'ai eu l'opportunité d'effectuer mes stages dans deux
+                            entreprises aux secteurs d'activité différents. Ces expériences m'ont permis de développer
+                            des compétences variées et de mettre en pratique mes connaissances dans des contextes
+                            professionnels réels.</p>
+                    </div>
+
+                    <div class="companies-grid">
+                        <!-- Paprec Group -->
+                        <div class="company-card">
+                            <div class="company-header">
+                                <div class="company-logo-wrapper">
+                                    <img src="https://placehold.co/60x60/white/431a6d?text=PAPREC"
+                                        alt="Paprec Group Logo" class="company-logo">
+                                    <div>
+                                        <h3 class="company-name">Paprec Group</h3>
+                                        <p class="company-period">Septembre 2023 - Juin 2024 (1 an)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="company-content">
+                                <div class="company-info">
+                                    <p><span class="info-label">Secteur :</span> Recyclage et Gestion des déchets</p>
+                                    <p><span class="info-label">Taille :</span> +16 000 collaborateurs</p>
+
+                                </div>
+
+                                <div class="company-description">
+                                    <p>Leader français du recyclage, Paprec Group est spécialisé dans la collecte et la
+                                        valorisation des déchets. L'entreprise traite plus de 16 millions de tonnes de
+                                        déchets par an et possède plus de 300 sites en France et à l'international.</p>
+                                </div>
+
+                                <div class="company-missions">
+                                    <h4 class="missions-title"><i class="fas fa-tasks"></i> Missions principales</h4>
+                                    <ul class="missions-list">
+                                        <li>Développement d'outils internes de gestion et de suivi</li>
+                                        <li>Automatisation des processus de reporting environnemental</li>
+                                        <li>Gestion de bases de données</li>
+                                    </ul>
+                                </div>
+
+                                <div class="company-skills">
+                                    <h4 class="skills-title"><i class="fas fa-code"></i> Compétences développées</h4>
+                                    <div class="skills-list">
+                                        <span class="skill-tag">SQL</span>
+                                        <span class="skill-tag">PowerApps</span>
+                                    </div>
+                                </div>
+
+                                <div class="company-cta">
+                                    <a href="#paprec-modal" class="details-btn"
+                                        onclick="document.getElementById('paprec-modal').style.display='block'">
+                                        Plus de détails <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TopDown Advisory -->
+                        <div class="company-card">
+                            <div class="company-header">
+                                <div class="company-logo-wrapper">
+                                    <img src="../projet.image/stfl.png" alt="TopDown Advisory Logo"
+                                        class="company-logo">
+                                    <div>
+                                        <h3 class="company-name">TopDown Advisory</h3>
+                                        <p class="company-period">Octobre 2024 - Aout 2025</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="company-content">
+                                <div class="company-info">
+                                    <p><span class="info-label">Secteur :</span> Conseil financier et bancaire</p>
+                                    <p><span class="info-label">Taille :</span> 25 collaborateurs</p>
+
+                                </div>
+
+                                <div class="company-description">
+                                    <p>TopDown Advisory est un cabinet de conseil spécialisé dans les stress tests
+                                        bancaires et les analyses financières pour le secteur bancaire. L'entreprise
+                                        accompagne les institutions financières dans l'évaluation de leur résilience
+                                        face aux scénarios de crise.</p>
+                                </div>
+
+                                <div class="company-missions">
+                                    <h4 class="missions-title"><i class="fas fa-tasks"></i> Missions principales</h4>
+                                    <ul class="missions-list">
+                                        <li>Développement d'une API de prévisualisation des données financières</li>
+                                        <li>Création d'une plateforme web pour les stress tests bancaires</li>
+                                    </ul>
+                                </div>
+
+                                <div class="company-skills">
+                                    <h4 class="skills-title"><i class="fas fa-code"></i> Compétences développées</h4>
+                                    <div class="skills-list">
+                                        <span class="skill-tag">Python</span>
+                                        <span class="skill-tag">API</span>
+                                        <span class="skill-tag">Javascript</span>
+                                        <span class="skill-tag">OVH/VPS</span>
+                                        <span class="skill-tag">SQL</span>
+                                    </div>
+                                </div>
+
+                                <div class="company-cta">
+                                    <a href="#tda-modal" class="details-btn"
+                                        onclick="document.getElementById('tda-modal').style.display='block'">
+                                        Plus de détails <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h2 class="section-title">Bilan des Expériences</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>Ces deux expériences professionnelles m'ont permis de développer des compétences
+                            complémentaires et d'appréhender différents secteurs d'activité. Chez Paprec Group, j'ai pu
+                            travailler dans un grand groupe avec des problématiques de gestion de données à grande
+                            échelle, tandis que chez TopDown Advisory, j'ai évolué dans une structure plus petite avec
+                            des enjeux techniques pointus liés au secteur financier.</p>
+                        <p>La diversité de ces expériences constitue un atout majeur pour mon parcours professionnel, me
+                            permettant d'être polyvalent et adaptable à différents environnements de travail.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Modals pour plus de détails -->
+        <div id="paprec-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Paprec Group - Présentation</h3>
+                    <button class="modal-close" onclick="document.getElementById('paprec-modal').style.display='none'">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <iframe class="pdf-container" src="path/to/Parcours.pdf" type="application/pdf"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="tda-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">TopDown Advisory - Présentation</h3>
+                    <button class="modal-close" onclick="document.getElementById('tda-modal').style.display='none'">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <iframe class="pdf-container" src="path/to/Parcours.pdf" type="application/pdf"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Fermer les modals quand on clique en dehors
+            window.onclick = function (event) {
+                if (event.target.className === 'modal') {
+                    event.target.style.display = "none";
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>
